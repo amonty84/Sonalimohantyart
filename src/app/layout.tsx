@@ -105,6 +105,12 @@ export default function RootLayout({
             __html: `if("${process.env.NEXT_PUBLIC_GA_ID || ''}"){var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID || ''}';document.head.appendChild(s);window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${process.env.NEXT_PUBLIC_GA_ID || ''}');}`,
           }}
         />
+        {/* Service Worker Registration */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('/sw.js').catch(function(){})});}`,
+          }}
+        />
       </head>
       <body className="antialiased font-sans bg-background text-foreground selection:bg-foreground selection:text-background noise-bg relative min-h-screen flex flex-col">
         <a

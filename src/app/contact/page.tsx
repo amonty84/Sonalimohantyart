@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, FormEvent } from "react";
+import { useState, useEffect, FormEvent, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import MagneticButton from "@/components/ui/MagneticButton";
 import JsonLd from "@/components/seo/JsonLd";
 
@@ -14,9 +15,20 @@ const contactSchema = {
 
 type FormState = "idle" | "submitting" | "success" | "error";
 
-export default function ContactPage() {
+function ContactForm() {
+    const searchParams = useSearchParams();
+    const artworkTitle = searchParams.get("title");
+    const artworkSlug = searchParams.get("artwork");
+
     const [formState, setFormState] = useState<FormState>("idle");
     const [errorMessage, setErrorMessage] = useState("");
+    const [message, setMessage] = useState("");
+
+    useEffect(() => {
+        if (artworkTitle) {
+            setMessage(`Hi, I'm interested in the artwork "${artworkTitle}". Could you please provide pricing and availability details?`);
+        }
+    }, [artworkTitle]);
 
     async function handleSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
@@ -34,6 +46,7 @@ export default function ContactPage() {
 
             if (response.ok) {
                 setFormState("success");
+                setMessage("");
                 (e.target as HTMLFormElement).reset();
             } else {
                 setFormState("error");
@@ -46,6 +59,70 @@ export default function ContactPage() {
     }
 
     return (
+        <form onSubmit={handleSubmit} className="md:col-span-3 space-y-10">
+            {artworkTitle && (
+                <div className="bg-card border border-border rounded-md p-6 mb-4">
+                    <p className="text-xs tracking-[0.2em] uppercase text-muted font-semibold mb-2">Inquiry About</p>
+                    <p className="font-serif text-xl">{artworkTitle}</p>
+                    {artworkSlug && <input type="hidden" name="artwork" value={artworkTitle} />}
+                </div>
+            )}
+
+            <div className="group">
+                <label htmlFor="contact-name" className="block text-xs font-semibold tracking-[0.2em] uppercase text-muted mb-3 group-focus-within:text-foreground transition-colors">Name</label>
+                <input
+                    id="contact-name"
+                    type="text"
+                    name="name"
+                    required
+                    className="w-full bg-transparent border-b border-border py-3 focus:outline-none focus:border-foreground transition-colors font-light text-lg"
+                    placeholder="Jane Doe"
+                />
+            </div>
+            <div className="group">
+                <label htmlFor="contact-email" className="block text-xs font-semibold tracking-[0.2em] uppercase text-muted mb-3 group-focus-within:text-foreground transition-colors">Email</label>
+                <input
+                    id="contact-email"
+                    type="email"
+                    name="email"
+                    required
+                    className="w-full bg-transparent border-b border-border py-3 focus:outline-none focus:border-foreground transition-colors font-light text-lg"
+                    placeholder="jane@example.com"
+                />
+            </div>
+            <div className="group">
+                <label htmlFor="contact-message" className="block text-xs font-semibold tracking-[0.2em] uppercase text-muted mb-3 group-focus-within:text-foreground transition-colors">Message</label>
+                <textarea
+                    id="contact-message"
+                    name="message"
+                    required
+                    minLength={10}
+                    rows={5}
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    className="w-full bg-transparent border-b border-border py-3 focus:outline-none focus:border-foreground transition-colors font-light text-lg resize-none"
+                    placeholder="Your inquiry..."
+                />
+            </div>
+
+            {formState === "success" && (
+                <p className="text-green-700 dark:text-green-400 font-light">Thank you for your message. We will get back to you soon.</p>
+            )}
+            {formState === "error" && (
+                <p className="text-red-700 dark:text-red-400 font-light">{errorMessage}</p>
+            )}
+
+            <div className="pt-4">
+                <MagneticButton className="inline-block px-12 py-4 border border-foreground hover:bg-foreground hover:text-background transition-colors duration-500 uppercase tracking-widest text-sm w-full md:w-auto disabled:opacity-50 disabled:cursor-not-allowed">
+                    {formState === "submitting" ? "Sending..." : "Send Message"}
+                </MagneticButton>
+            </div>
+        </form>
+    );
+}
+
+export default function ContactPage() {
+    return (
         <div className="container mx-auto px-6 md:px-12 py-32 max-w-5xl">
             <JsonLd data={contactSchema} />
             <div className="text-center mb-24">
@@ -56,55 +133,9 @@ export default function ContactPage() {
             </div>
 
             <div className="grid md:grid-cols-5 gap-16 lg:gap-24">
-                <form onSubmit={handleSubmit} className="md:col-span-3 space-y-10">
-                    <div className="group">
-                        <label htmlFor="contact-name" className="block text-xs font-semibold tracking-[0.2em] uppercase text-muted mb-3 group-focus-within:text-foreground transition-colors">Name</label>
-                        <input
-                            id="contact-name"
-                            type="text"
-                            name="name"
-                            required
-                            className="w-full bg-transparent border-b border-border py-3 focus:outline-none focus:border-foreground transition-colors font-light text-lg"
-                            placeholder="Jane Doe"
-                        />
-                    </div>
-                    <div className="group">
-                        <label htmlFor="contact-email" className="block text-xs font-semibold tracking-[0.2em] uppercase text-muted mb-3 group-focus-within:text-foreground transition-colors">Email</label>
-                        <input
-                            id="contact-email"
-                            type="email"
-                            name="email"
-                            required
-                            className="w-full bg-transparent border-b border-border py-3 focus:outline-none focus:border-foreground transition-colors font-light text-lg"
-                            placeholder="jane@example.com"
-                        />
-                    </div>
-                    <div className="group">
-                        <label htmlFor="contact-message" className="block text-xs font-semibold tracking-[0.2em] uppercase text-muted mb-3 group-focus-within:text-foreground transition-colors">Message</label>
-                        <textarea
-                            id="contact-message"
-                            name="message"
-                            required
-                            minLength={10}
-                            rows={5}
-                            className="w-full bg-transparent border-b border-border py-3 focus:outline-none focus:border-foreground transition-colors font-light text-lg resize-none"
-                            placeholder="Your inquiry..."
-                        />
-                    </div>
-
-                    {formState === "success" && (
-                        <p className="text-green-700 dark:text-green-400 font-light">Thank you for your message. We will get back to you soon.</p>
-                    )}
-                    {formState === "error" && (
-                        <p className="text-red-700 dark:text-red-400 font-light">{errorMessage}</p>
-                    )}
-
-                    <div className="pt-4">
-                        <MagneticButton className="inline-block px-12 py-4 border border-foreground hover:bg-foreground hover:text-background transition-colors duration-500 uppercase tracking-widest text-sm w-full md:w-auto disabled:opacity-50 disabled:cursor-not-allowed">
-                            {formState === "submitting" ? "Sending..." : "Send Message"}
-                        </MagneticButton>
-                    </div>
-                </form>
+                <Suspense fallback={<div className="md:col-span-3" />}>
+                    <ContactForm />
+                </Suspense>
 
                 <div className="md:col-span-2 flex flex-col justify-start gap-12 border-t md:border-t-0 md:border-l border-border pt-16 md:pt-0 md:pl-12 lg:pl-16">
                     <div>

@@ -12,6 +12,23 @@ export interface Artwork {
   category: ArtworkCategory;
 }
 
+export function getArtworkSlug(artwork: Artwork): string {
+  return artwork.title
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+}
+
+export function getArtworkBySlug(slug: string): Artwork | undefined {
+  return galleryData.find((a) => getArtworkSlug(a) === slug);
+}
+
+export function getRelatedArtworks(artwork: Artwork, count = 4): Artwork[] {
+  return galleryData
+    .filter((a) => a.id !== artwork.id && a.category === artwork.category)
+    .slice(0, count);
+}
+
 export const galleryData: Artwork[] = [
   {
     "id": 1,
