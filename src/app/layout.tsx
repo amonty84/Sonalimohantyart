@@ -99,6 +99,12 @@ export default function RootLayout({
             __html: `try{if(localStorage.theme==='dark'||(!localStorage.theme&&window.matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.classList.add('dark')}}catch(e){}`,
           }}
         />
+        {/* Google Analytics 4 — set NEXT_PUBLIC_GA_ID in .env.local to enable */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `if("${process.env.NEXT_PUBLIC_GA_ID || ''}"){var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID || ''}';document.head.appendChild(s);window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${process.env.NEXT_PUBLIC_GA_ID || ''}');}`,
+          }}
+        />
       </head>
       <body className="antialiased font-sans bg-background text-foreground selection:bg-foreground selection:text-background noise-bg relative min-h-screen flex flex-col">
         <a

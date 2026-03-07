@@ -28,7 +28,7 @@ export default function NotFound() {
             </motion.div>
 
             {/* Visual element */}
-            <div className="absolute inset-0 z-[-1] opacity-[0.03] pointer-events-none">
+            <div className="absolute inset-0 z-[-1] opacity-[0.03] pointer-events-none" aria-hidden="true">
                 <svg viewBox="0 0 800 600" className="w-full h-full opacity-50" preserveAspectRatio="xMidYMid slice">
                     <motion.path
                         d="M 100,500 C 200,400 300,600 400,300 C 500,0 600,400 700,200"

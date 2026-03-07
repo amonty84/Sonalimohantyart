@@ -19,20 +19,24 @@ export default function ThemeProvider({ children }: { children: React.ReactNode 
     const [theme, setTheme] = useState<Theme>("light");
 
     useEffect(() => {
-        const stored = localStorage.getItem("theme") as Theme | null;
-        if (stored) {
-            setTheme(stored);
-            document.documentElement.classList.toggle("dark", stored === "dark");
-        } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-            setTheme("dark");
-            document.documentElement.classList.add("dark");
+        try {
+            const stored = localStorage.getItem("theme");
+            if (stored === "light" || stored === "dark") {
+                setTheme(stored);
+                document.documentElement.classList.toggle("dark", stored === "dark");
+            } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+                setTheme("dark");
+                document.documentElement.classList.add("dark");
+            }
+        } catch {
+            // localStorage unavailable (private browsing) — use default
         }
     }, []);
 
     const toggle = () => {
         const next = theme === "light" ? "dark" : "light";
         setTheme(next);
-        localStorage.setItem("theme", next);
+        try { localStorage.setItem("theme", next); } catch { /* private browsing */ }
         document.documentElement.classList.toggle("dark", next === "dark");
     };
 

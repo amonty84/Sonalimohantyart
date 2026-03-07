@@ -1,9 +1,18 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Link from "next/link";
 import { Facebook, Instagram, Mail } from "lucide-react";
 
 export default function Footer() {
     const currentYear = new Date().getFullYear();
+    const [newsletterMsg, setNewsletterMsg] = useState("");
+
+    const handleNewsletterSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        setNewsletterMsg("Coming soon! Stay tuned.");
+        setTimeout(() => setNewsletterMsg(""), 3000);
+    };
 
     return (
         <footer className="w-full bg-background border-t border-border py-12 md:py-20 mt-auto">
@@ -29,16 +38,20 @@ export default function Footer() {
                     <p className="text-muted text-sm font-light leading-relaxed">
                         Subscribe for updates on upcoming releases, exhibitions, and exclusive insights.
                     </p>
-                    <form className="w-full relative mt-2">
+                    <form className="w-full relative mt-2" onSubmit={handleNewsletterSubmit}>
                         <input
                             type="email"
                             placeholder="Email address"
+                            required
                             className="w-full bg-transparent border-b border-border py-2 pr-10 text-sm focus:outline-none focus:border-foreground transition-colors"
                         />
-                        <button type="button" className="absolute right-0 top-1/2 -translate-y-1/2 text-muted hover:text-foreground transition-colors">
+                        <button type="submit" className="absolute right-0 top-1/2 -translate-y-1/2 text-muted hover:text-foreground transition-colors">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                         </button>
                     </form>
+                    {newsletterMsg && (
+                        <p className="text-xs text-muted italic">{newsletterMsg}</p>
+                    )}
                 </div>
 
                 {/* Social & Contact */}
@@ -64,8 +77,8 @@ export default function Footer() {
             <div className="container mx-auto px-6 md:px-12 mt-16 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-muted">
                 <p>&copy; {currentYear} Sonali Mohanty Art. All rights reserved.</p>
                 <div className="flex gap-6">
-                    <span className="hover:text-foreground cursor-pointer transition-colors">Privacy Policy</span>
-                    <span className="hover:text-foreground cursor-pointer transition-colors">Terms of Service</span>
+                    <Link href="/privacy" className="hover:text-foreground transition-colors">Privacy Policy</Link>
+                    <Link href="/terms" className="hover:text-foreground transition-colors">Terms of Service</Link>
                 </div>
             </div>
         </footer>

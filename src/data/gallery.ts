@@ -60,7 +60,7 @@ export const galleryData: Artwork[] = [
   },
   {
     "id": 16,
-    "title": "Brothers in Arm 1",
+    "title": "Brothers in Arms 1",
     "src": "/images/Brothers-in-Arm-1_24X24n_2016-1.webp",
     "year": "2016",
     "medium": "Mixed Media / Acrylic",

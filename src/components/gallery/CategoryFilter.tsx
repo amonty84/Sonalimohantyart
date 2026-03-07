@@ -21,8 +21,6 @@ export default function CategoryFilter({
     ...CATEGORIES.map((cat) => ({ label: cat, value: cat })),
   ];
 
-  console.log("CategoryFilter rendering with:", { activeCategory, totalCount });
-
   return (
     <div className="relative mb-12 border-b border-border pb-4">
       <nav

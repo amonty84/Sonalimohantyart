@@ -28,7 +28,7 @@ export default function Preloader() {
                     <div className="relative flex flex-col items-center justify-center text-center px-4 w-full h-full max-w-3xl">
 
                         {/* Abstract background drawing animation */}
-                        <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.07]">
+                        <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.07]" aria-hidden="true">
                             <svg viewBox="0 0 800 600" className="w-full h-full max-w-4xl" preserveAspectRatio="xMidYMid slice">
                                 <motion.path
                                     d="M 100,500 C 200,400 300,600 400,300 C 500,0 600,400 700,200"

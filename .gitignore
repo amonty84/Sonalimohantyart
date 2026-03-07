@@ -42,3 +42,6 @@ next-env.d.ts
 *.zip
 out/
 out.zip
+
+# mcp config (contains API tokens)
+.mcp.json

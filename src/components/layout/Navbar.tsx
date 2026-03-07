@@ -51,16 +51,23 @@ export default function Navbar() {
 
                 {/* Desktop Nav */}
                 <nav aria-label="Main navigation" className="hidden md:flex items-center gap-10">
-                    {navItems.map((item) => (
-                        <Link
-                            key={item.name}
-                            href={item.href}
-                            className={`text-[10px] font-medium uppercase tracking-[0.3em] transition-all duration-500 hover:opacity-100 relative group overflow-hidden ${scrolled ? "text-foreground/70" : "text-white/70"}`}
-                        >
-                            <span className="group-hover:text-current">{item.name}</span>
-                            <span className={`absolute bottom-0 left-0 w-full h-[1px] transform translate-x-[-105%] group-hover:translate-x-0 transition-transform duration-500 ${scrolled ? "bg-foreground" : "bg-white"}`}></span>
-                        </Link>
-                    ))}
+                    {navItems.map((item) => {
+                        const isActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
+                        return (
+                            <Link
+                                key={item.name}
+                                href={item.href}
+                                className={`text-[10px] font-medium uppercase tracking-[0.3em] transition-all duration-500 hover:opacity-100 relative group overflow-hidden ${isActive
+                                    ? (scrolled ? "text-foreground opacity-100" : "text-white opacity-100")
+                                    : (scrolled ? "text-foreground/70" : "text-white/70")
+                                }`}
+                                aria-current={isActive ? "page" : undefined}
+                            >
+                                <span className="group-hover:text-current">{item.name}</span>
+                                <span className={`absolute bottom-0 left-0 w-full h-[1px] transition-transform duration-500 ${isActive ? "translate-x-0" : "translate-x-[-105%] group-hover:translate-x-0"} ${scrolled ? "bg-foreground" : "bg-white"}`}></span>
+                            </Link>
+                        );
+                    })}
                     <button
                         onClick={toggleTheme}
                         aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}

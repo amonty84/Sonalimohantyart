@@ -26,7 +26,7 @@ export default function ContactPage() {
         const formData = new FormData(e.currentTarget);
 
         try {
-            const response = await fetch("https://formspree.io/f/sonalimohantyart@gmail.com", {
+            const response = await fetch(process.env.NEXT_PUBLIC_FORMSPREE_URL || "https://formspree.io/f/sonalimohantyart@gmail.com", {
                 method: "POST",
                 body: formData,
                 headers: { Accept: "application/json" },
