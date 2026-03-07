@@ -33,7 +33,9 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./out/
           server-dir: domains/marsysexports.in/public_html/
+          state-name: .ftp-deploy-state-v2.json
           dangerous-clean-slate: true
+
           # Optional: exclude certain files
           exclude: |
             **/.git*
