@@ -74,7 +74,7 @@ export default function MasonryGrid({ items }: MasonryGridProps) {
                                         transition={{ duration: 1.5, ease: [0.33, 1, 0.68, 1] }}
                                         className="relative w-full h-auto min-h-[250px] bg-card overflow-hidden"
                                     >
-                                        <div className="absolute inset-0 bg-border animate-pulse transition-opacity duration-1000" id={`pulse-${artwork.id}`} />
+                                        <div className="absolute inset-0 bg-border animate-pulse" id={`pulse-${artwork.id}`} />
                                         <Image
                                             src={artwork.src}
                                             alt={`${artwork.title} — ${artwork.medium}, ${artwork.dimensions}`}
@@ -86,7 +86,10 @@ export default function MasonryGrid({ items }: MasonryGridProps) {
                                                 img.classList.remove('opacity-0');
                                                 img.classList.add('opacity-100');
                                                 const pulse = document.getElementById(`pulse-${artwork.id}`);
-                                                if (pulse) pulse.classList.add('opacity-0');
+                                                if (pulse) {
+                                                    pulse.classList.remove('animate-pulse');
+                                                    pulse.style.display = 'none';
+                                                }
                                             }}
                                             priority={idx < 4}
                                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
