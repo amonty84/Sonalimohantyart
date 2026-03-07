@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-
 Sitemap: https://sonalimohantyart.com/sitemap.xml
