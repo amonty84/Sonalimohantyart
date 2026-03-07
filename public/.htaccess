@@ -1,23 +1,43 @@
+# Hostinger Next.js Static Export .htaccess
+
+# Disable directory listing
+Options -Indexes
+
+# Set default index file
+DirectoryIndex index.html
+
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
 
-  # Handle trailing slashes
+  # Case 1: If requested file exists, serve it
+  RewriteCond %{REQUEST_FILENAME} -f
+  RewriteRule ^ - [L]
+
+  # Case 2: Handle trailing slashes for directories (e.g., /gallery/ -> /gallery.html)
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{REQUEST_URI} ^/(.+)/$
   RewriteCond %{DOCUMENT_ROOT}/%1.html -f
   RewriteRule ^(.*)/$ $1.html [L]
 
-  # Redirect extensionless URLs to .html files
+  # Case 3: Handle extensionless URLs (e.g., /gallery -> /gallery.html)
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{DOCUMENT_ROOT}/$1.html -f
   RewriteRule ^(.*)$ $1.html [L]
 
-  # Ensure _next folder is accessible
-  # No special rules usually needed if not blocked by another .htaccess
+  # Case 4: Handle deep link routes (SPA fallback if needed)
+  # RewriteCond %{REQUEST_FILENAME} !-f
+  # RewriteCond %{REQUEST_FILENAME} !-d
+  # RewriteRule . /index.html [L]
 </IfModule>
 
-# Handle errors
+# Custom Error Pages
 ErrorDocument 404 /404.html
+ErrorDocument 403 /404.html
+
+# Prevent browser from blocking _next folder
+<IfModule mod_headers.c>
+  Header set Access-Control-Allow-Origin "*"
+</IfModule>
