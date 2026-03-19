@@ -10,6 +10,7 @@ export interface Artwork {
   medium: string;
   dimensions: string;
   category: ArtworkCategory;
+  description?: string;
 }
 
 export function getArtworkSlug(artwork: Artwork): string {
@@ -30,6 +31,123 @@ export function getRelatedArtworks(artwork: Artwork, count = 4): Artwork[] {
 }
 
 export const galleryData: Artwork[] = [
+  {
+    "id": 154,
+    "title": "Floral Oracle",
+    "src": "/images/Floral-Oracle_SonaliMohanty_2026.webp",
+    "year": "2026",
+    "medium": "Acrylic / Mixed Media on Canvas",
+    "dimensions": "",
+    "category": "Flowers"
+  },
+  {
+    "id": 155,
+    "title": "Garden Bear",
+    "src": "/images/Garden-Bear_SonaliMohanty_2026.webp",
+    "year": "2026",
+    "medium": "Acrylic / Mixed Media on Canvas",
+    "dimensions": "",
+    "category": "Animals & Birds"
+  },
+  {
+    "id": 156,
+    "title": "Venus in Bloom 2",
+    "src": "/images/Venus-in-Bloom-2_SonaliMohanty_2025.webp",
+    "year": "2025",
+    "medium": "Acrylic / Mixed Media on Canvas",
+    "dimensions": "",
+    "category": "Women"
+  },
+  {
+    "id": 145,
+    "title": "Wrapped in Petals",
+    "src": "/images/Wrapped-in-Petals_18x24_SonaliMohanty_2025.webp",
+    "year": "2025",
+    "medium": "Acrylic / Mixed Media",
+    "dimensions": "18\"x24\"",
+    "category": "Women",
+    "description": "Eyes closed. Guard down. Surrounded by vibrant florals and layered textures, she rests in quiet strength. Eyes closed, she turns inward — grounded, powerful, and unapologetically herself. A moment of stillness. A world of color."
+  },
+  {
+    "id": 146,
+    "title": "Whispers Behind the Fan",
+    "src": "/images/Whispers-Behind-the-Fan_12x12_SonaliMohanty_2026.webp",
+    "year": "2026",
+    "medium": "Acrylic / Mixed Media on Canvas",
+    "dimensions": "12\"x12\"",
+    "category": "Women",
+    "description": "Inspired by the ornamental elegance of Gustav Klimt, this piece captures feminine mystery layered in bold color, pattern, and symbolism. A modern homage to opulence and quiet power — where adornment becomes strength and silence speaks volumes. Behind the crimson fan lies a world of unspoken thoughts — layered in pattern, petals, and power. She does not hide. She chooses what to reveal."
+  },
+  {
+    "id": 147,
+    "title": "Venus in Bloom",
+    "src": "/images/Venus-in-Bloom_24x24_SonaliMohanty_2025.webp",
+    "year": "2025",
+    "medium": "Acrylic / Mixed Media on Canvas",
+    "dimensions": "24\"x24\"",
+    "category": "Women",
+    "description": "Inspired by The Birth of Venus by Sandro Botticelli, this painting reimagines the goddess through a bold contemporary lens. No longer emerging quietly from the sea, she rises from a garden of color, texture, and layered symbolism. Flowing hair becomes movement and freedom. Oversized florals symbolize growth, femininity, and creative power. Script elements woven into the figure suggest history, language, and identity — reminding us that the modern woman carries stories of both past and present within her. While the Renaissance muse embodied ideal beauty, this Venus radiates confidence, individuality, and strength. She is not simply born — she blooms."
+  },
+  {
+    "id": 148,
+    "title": "Winged Reverie",
+    "src": "/images/Winged-Reverie_12x12_SonaliMohanty_2026.webp",
+    "year": "2026",
+    "medium": "Acrylic / Mixed Media on Canvas",
+    "dimensions": "12\"x12\"",
+    "category": "Animals & Birds",
+    "description": "A moment suspended between motion and stillness. This hummingbird drifts through a garden of pattern and color — where nature becomes ornament and flight becomes poetry. A celebration of energy, joy, and delicate strength."
+  },
+  {
+    "id": 149,
+    "title": "Pearl and Petals",
+    "src": "/images/Pearl-and-Petals_12x12_SonaliMohanty_2026.webp",
+    "year": "2026",
+    "medium": "Acrylic / Mixed Media",
+    "dimensions": "12\"x12\"",
+    "category": "Women",
+    "description": "Inspired by Girl with a Pearl Earring by Johannes Vermeer, this piece reimagines the timeless muse in full bloom. Surrounded by bold florals, layered textures, and vibrant color, she transforms from quiet mystery into a symbol of strength and modern femininity. The pearl remains — a whisper of history — while everything around her blossoms with contemporary energy."
+  },
+  {
+    "id": 150,
+    "title": "Blooming June",
+    "src": "/images/Blooming-June_12x12_SonaliMohanty_2026.webp",
+    "year": "2026",
+    "medium": "Acrylic / Mixed Media on Canvas",
+    "dimensions": "12\"x12\"",
+    "category": "Women",
+    "description": "Inspired by Flaming June by Frederic Leighton, this painting reimagines quiet repose through a vibrant, contemporary lens. Draped in radiant orange and surrounded by lush, oversized florals, the figure rests in a moment of serene introspection — suspended between dream and awakening. The layered script elements woven through the composition suggest memory, history, and inner dialogue, while the bold botanicals symbolize growth, renewal, and feminine strength. Where the original embodied stillness and classical beauty, this interpretation blooms with texture, color, and modern energy. She does not simply sleep — she gathers light, warmth, and power. She is June — in full bloom."
+  },
+  {
+    "id": 151,
+    "title": "Garden of Flight",
+    "src": "/images/Garden-of-Flight_18x24_SonaliMohanty_2026.webp",
+    "year": "2026",
+    "medium": "Acrylic / Mixed Media on Canvas",
+    "dimensions": "18\"x24\"",
+    "category": "Animals & Birds",
+    "description": "A celebration of color, movement, and harmony, this piece captures two vibrant kingfishers suspended in a flourishing world of blooms and layered texture. Wings outstretched, they embody freedom and vitality, while the surrounding florals symbolize growth, joy, and creative abundance. Here, the garden is not still — it breathes, sings, and takes flight. Where color meets movement and the garden comes alive. These vibrant wings don't just fly — they celebrate freedom, joy, and the beauty of blooming boldly. In this world, even flowers learn to soar!"
+  },
+  {
+    "id": 152,
+    "title": "Equine Elegance",
+    "src": "/images/Equine-Elegance_12x12_SonaliMohanty_2026.webp",
+    "year": "2026",
+    "medium": "Acrylic & Mixed Media on Canvas",
+    "dimensions": "12\"x12\"",
+    "category": "Animals & Birds",
+    "description": "Strength, grace, and ornamentation come together in radiant color. Adorned in florals and layered textures, this regal presence celebrates beauty with power and poise. Bold. Refined. Unforgettable."
+  },
+  {
+    "id": 153,
+    "title": "Butterfly and Blossoms",
+    "src": "/images/Butterfly-and-Blossoms_12x12_SonaliMohanty_2026.webp",
+    "year": "2026",
+    "medium": "Acrylic / Mixed Media on Canvas",
+    "dimensions": "12\"x12\"",
+    "category": "Animals & Birds",
+    "description": "A dance between wings and petals, color and movement. Surrounded by vibrant florals and layered textures, the butterfly becomes a symbol of growth, freedom, and fearless beauty. Where flowers flourish, transformation follows."
+  },
   {
     "id": 1,
     "title": "32 Forms of Ganesha",

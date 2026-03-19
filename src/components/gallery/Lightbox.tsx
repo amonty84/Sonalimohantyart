@@ -133,7 +133,16 @@ export default function Lightbox({ artwork, onClose, onNext, onPrev }: LightboxP
                                         </>
                                     )}
                                     <span>{artwork.medium}</span>
+                                    {artwork.dimensions && artwork.dimensions !== "Various" && (
+                                        <>
+                                            <span className="w-1 h-1 rounded-full bg-gray-500" />
+                                            <span>{artwork.dimensions}</span>
+                                        </>
+                                    )}
                                 </div>
+                                {artwork.description && (
+                                    <p className="mt-4 text-sm md:text-base text-gray-300 leading-relaxed font-light italic">{artwork.description}</p>
+                                )}
                             </div>
                         </motion.div>
                     </AnimatePresence>
