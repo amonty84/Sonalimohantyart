@@ -50,8 +50,8 @@ export default function Hero() {
                 className="absolute inset-0 z-0"
             >
                 <Image
-                    src="/images/The-Magnificient-Duo_36X30_SonaliMohanty_2025-1.webp"
-                    alt="Atmospheric Background Artwork"
+                    src="/images/New-Hero.jpeg"
+                    alt="Sonali Mohanty — Featured Artwork"
                     fill
                     className="object-cover object-center grayscale-[0.2]"
                     priority
@@ -104,7 +104,7 @@ export default function Hero() {
                         animate={{ opacity: 1 }}
                         transition={{ duration: 1, delay: initialDelay + 1.5 }}
                     >
-                        <Link href="/gallery" className="inline-block px-10 py-4 border border-white/40 bg-white/5 backdrop-blur-sm hover:bg-white hover:text-black transition-all duration-700 tracking-[0.3em] uppercase text-[10px] font-medium rounded-full">
+                        <Link href="/gallery/" className="inline-block px-10 py-4 border border-white/40 bg-white/5 backdrop-blur-sm hover:bg-white hover:text-black transition-all duration-700 tracking-[0.3em] uppercase text-[10px] font-medium rounded-full">
                             Begin Exploration
                         </Link>
                     </motion.div>

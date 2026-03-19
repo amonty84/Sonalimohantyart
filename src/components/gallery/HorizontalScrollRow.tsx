@@ -21,8 +21,6 @@ function ArtworkCard({
   index: number;
   onClick: () => void;
 }) {
-  const [loaded, setLoaded] = useState(false);
-
   return (
     <div className="flex-shrink-0 w-[200px] sm:w-[240px] md:w-[280px] lg:w-[300px]">
       <motion.div
@@ -31,13 +29,12 @@ function ArtworkCard({
         className="group relative cursor-pointer overflow-hidden rounded-md border border-neutral-200/40 shadow-[0_4px_20px_rgb(0,0,0,0.02)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-shadow duration-700"
         onClick={onClick}
       >
-        <div className={`relative h-[260px] sm:h-[300px] md:h-[340px] lg:h-[360px] overflow-hidden ${loaded ? "" : "bg-neutral-200"}`}>
+        <div className="relative h-[260px] sm:h-[300px] md:h-[340px] lg:h-[360px] bg-neutral-200 overflow-hidden">
           <Image
             src={artwork.src}
             alt={artwork.title}
             fill
-            className={`object-cover transition-opacity duration-500 ${loaded ? "opacity-100" : "opacity-0"}`}
-            onLoad={() => setLoaded(true)}
+            className="object-cover"
             sizes="(max-width: 640px) 200px, (max-width: 768px) 240px, (max-width: 1024px) 280px, 300px"
           />
         </div>

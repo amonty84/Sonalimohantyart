@@ -9,10 +9,10 @@ import { useTheme } from "@/components/ui/ThemeProvider";
 
 const navItems = [
     { name: "Home", href: "/" },
-    { name: "Gallery", href: "/gallery" },
-    { name: "About", href: "/about" },
-    { name: "Resume", href: "/resume" },
-    { name: "Contact", href: "/contact" },
+    { name: "Gallery", href: "/gallery/" },
+    { name: "About", href: "/about/" },
+    { name: "Resume", href: "/resume/" },
+    { name: "Contact", href: "/contact/" },
 ];
 
 export default function Navbar() {
@@ -23,7 +23,7 @@ export default function Navbar() {
 
     useEffect(() => {
         const handleScroll = () => {
-            const isNotHome = pathname !== "/";
+            const isNotHome = pathname !== "/" && pathname !== "";
             setScrolled(isNotHome || window.scrollY > 50);
         };
 
@@ -52,7 +52,8 @@ export default function Navbar() {
                 {/* Desktop Nav */}
                 <nav aria-label="Main navigation" className="hidden md:flex items-center gap-10">
                     {navItems.map((item) => {
-                        const isActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
+                        const normalizedPath = pathname.endsWith("/") ? pathname : pathname + "/";
+                        const isActive = normalizedPath === item.href || (item.href !== "/" && normalizedPath.startsWith(item.href));
                         return (
                             <Link
                                 key={item.name}
@@ -128,7 +129,7 @@ export default function Navbar() {
                                 <Link
                                     href={item.href}
                                     onClick={() => setIsOpen(false)}
-                                    className={`font-serif text-5xl transition-colors ${pathname === item.href ? "text-foreground" : "text-muted hover:text-foreground"}`}
+                                    className={`font-serif text-5xl transition-colors ${(pathname.endsWith("/") ? pathname : pathname + "/") === item.href ? "text-foreground" : "text-muted hover:text-foreground"}`}
                                 >
                                     {item.name}
                                 </Link>

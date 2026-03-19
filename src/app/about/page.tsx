@@ -41,7 +41,8 @@ export default function AboutPage() {
                     {contentData.statement.split('\n\n').map((p, i) => <p key={i}>{p}</p>)}
                 </div>
             </div>
-            <div className="flex-1 w-full aspect-square relative sticky top-32 overflow-hidden rounded-sm shadow-xl">
+            <div className="flex-1 w-full aspect-square sticky top-32 overflow-hidden rounded-sm shadow-xl">
+              <div className="relative w-full h-full">
                 <Image
                     src="/images/Bio-Pic-_-Display-Pic.webp"
                     alt="Sonali Mohanty Portrait"
@@ -49,6 +50,7 @@ export default function AboutPage() {
                     className="object-cover object-center grayscale-[0.1] hover:grayscale-0 transition-all duration-700"
                     priority
                 />
+              </div>
             </div>
         </div>
     );

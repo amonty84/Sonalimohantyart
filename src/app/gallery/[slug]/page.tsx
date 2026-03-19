@@ -79,7 +79,7 @@ export default async function ArtworkPage({ params }: ArtworkPageProps) {
             {/* Breadcrumb */}
             <nav aria-label="Breadcrumb" className="container mx-auto px-6 md:px-12 pt-28 md:pt-36">
                 <ol className="flex items-center gap-2 text-xs tracking-widest uppercase text-muted">
-                    <li><Link href="/gallery" className="hover:text-foreground transition-colors">Gallery</Link></li>
+                    <li><Link href="/gallery/" className="hover:text-foreground transition-colors">Gallery</Link></li>
                     <li aria-hidden="true" className="text-border">/</li>
                     <li className="text-foreground truncate max-w-[200px]">{artwork.title}</li>
                 </ol>
@@ -121,7 +121,7 @@ export default async function ArtworkPage({ params }: ArtworkPageProps) {
                             </div>
                             <div className="flex justify-between items-center">
                                 <span className="text-xs tracking-[0.2em] uppercase text-muted font-semibold">Category</span>
-                                <Link href={`/gallery?category=${encodeURIComponent(artwork.category)}`} className="font-light text-lg hover:text-muted transition-colors underline-offset-4 hover:underline">
+                                <Link href={`/gallery/?category=${encodeURIComponent(artwork.category)}`} className="font-light text-lg hover:text-muted transition-colors underline-offset-4 hover:underline">
                                     {artwork.category}
                                 </Link>
                             </div>

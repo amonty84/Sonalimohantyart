@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Artwork } from "@/data/gallery";
@@ -26,11 +26,15 @@ function ParallaxGridItem({ children, index, className }: { children: React.Reac
 }
 
 function MasonryItem({ artwork, onClick }: { artwork: Artwork; onClick: () => void }) {
-    const [loaded, setLoaded] = useState(false);
+    // Prevent Framer Motion from baking hidden initial state into SSR HTML.
+    // On SSR/first render, items are visible by default.
+    // After hydration, the scroll-reveal animation works normally.
+    const [mounted, setMounted] = useState(false);
+    useEffect(() => { setMounted(true); }, []);
 
     return (
         <motion.div
-            initial={{ clipPath: "inset(100% 0% 0% 0%)", opacity: 0 }}
+            initial={mounted ? { clipPath: "inset(100% 0% 0% 0%)", opacity: 0 } : false}
             whileInView={{ clipPath: "inset(0% 0% 0% 0%)", opacity: 1 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
@@ -42,15 +46,14 @@ function MasonryItem({ artwork, onClick }: { artwork: Artwork; onClick: () => vo
                     layoutId={`image-container-${artwork.id}`}
                     whileHover={{ scale: 1.08 }}
                     transition={{ duration: 1.5, ease: [0.33, 1, 0.68, 1] }}
-                    className={`relative w-full h-[300px] sm:h-[400px] md:h-auto md:min-h-[250px] overflow-hidden ${loaded ? "" : "bg-neutral-200 animate-pulse"}`}
+                    className="relative w-full h-[300px] sm:h-[400px] md:h-auto md:min-h-[250px] bg-neutral-200 overflow-hidden"
                 >
                     <Image
                         src={artwork.src}
                         alt={artwork.title}
                         width={600}
                         height={800}
-                        className={`w-full h-auto object-cover transition-all duration-1000 ${loaded ? "opacity-100" : "opacity-0"}`}
-                        onLoad={() => setLoaded(true)}
+                        className="w-full h-auto object-cover"
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                 </motion.div>

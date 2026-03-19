@@ -27,9 +27,9 @@ export default function Footer() {
                 <div className="flex flex-col items-center md:items-start gap-3">
                     <h4 className="uppercase tracking-widest text-xs font-semibold text-foreground mb-2">Explore</h4>
                     <Link href="/" className="text-muted hover:text-foreground transition-colors text-sm hover:underline underline-offset-4">Home</Link>
-                    <Link href="/gallery" className="text-muted hover:text-foreground transition-colors text-sm hover:underline underline-offset-4">Gallery</Link>
-                    <Link href="/about" className="text-muted hover:text-foreground transition-colors text-sm hover:underline underline-offset-4">About</Link>
-                    <Link href="/resume" className="text-muted hover:text-foreground transition-colors text-sm hover:underline underline-offset-4">Exhibitions</Link>
+                    <Link href="/gallery/" className="text-muted hover:text-foreground transition-colors text-sm hover:underline underline-offset-4">Gallery</Link>
+                    <Link href="/about/" className="text-muted hover:text-foreground transition-colors text-sm hover:underline underline-offset-4">About</Link>
+                    <Link href="/resume/" className="text-muted hover:text-foreground transition-colors text-sm hover:underline underline-offset-4">Exhibitions</Link>
                 </div>
 
                 {/* Newsletter Subscription */}
@@ -63,11 +63,11 @@ export default function Footer() {
                         <a href="https://facebook.com/sonalimohantyart" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-foreground transition-colors" aria-label="Facebook">
                             <Facebook className="h-5 w-5" strokeWidth={1.5} />
                         </a>
-                        <Link href="/contact" className="text-muted hover:text-foreground transition-colors" aria-label="Email Contact">
+                        <Link href="/contact/" className="text-muted hover:text-foreground transition-colors" aria-label="Email Contact">
                             <Mail className="h-5 w-5" strokeWidth={1.5} />
                         </Link>
                     </div>
-                    <Link href="/contact" className="text-sm font-medium border-b border-foreground pb-1 hover:text-muted hover:border-muted transition-colors">
+                    <Link href="/contact/" className="text-sm font-medium border-b border-foreground pb-1 hover:text-muted hover:border-muted transition-colors">
                         Inquire about purchasing
                     </Link>
                 </div>
@@ -77,8 +77,8 @@ export default function Footer() {
             <div className="container mx-auto px-6 md:px-12 mt-16 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-muted">
                 <p>&copy; {currentYear} Sonali Mohanty Art. All rights reserved.</p>
                 <div className="flex gap-6">
-                    <Link href="/privacy" className="hover:text-foreground transition-colors">Privacy Policy</Link>
-                    <Link href="/terms" className="hover:text-foreground transition-colors">Terms of Service</Link>
+                    <Link href="/privacy/" className="hover:text-foreground transition-colors">Privacy Policy</Link>
+                    <Link href="/terms/" className="hover:text-foreground transition-colors">Terms of Service</Link>
                 </div>
             </div>
         </footer>
