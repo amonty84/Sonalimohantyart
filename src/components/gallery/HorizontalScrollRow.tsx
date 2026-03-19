@@ -15,45 +15,29 @@ interface HorizontalScrollRowProps {
 
 function ArtworkCard({
   artwork,
-  index,
   onClick,
 }: {
   artwork: Artwork;
   index: number;
   onClick: () => void;
 }) {
+  const [loaded, setLoaded] = useState(false);
+
   return (
-    <motion.div
-      initial={{ opacity: 0, x: 30 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true, margin: "-20px" }}
-      transition={{
-        duration: 0.6,
-        delay: Math.min(index * 0.05, 0.4),
-        ease: [0.16, 1, 0.3, 1],
-      }}
-      className="flex-shrink-0 w-[200px] sm:w-[240px] md:w-[280px] lg:w-[300px]"
-    >
+    <div className="flex-shrink-0 w-[200px] sm:w-[240px] md:w-[280px] lg:w-[300px]">
       <motion.div
         whileHover={{ scale: 1.03 }}
         transition={{ duration: 0.6, ease: [0.33, 1, 0.68, 1] }}
         className="group relative cursor-pointer overflow-hidden rounded-md border border-neutral-200/40 shadow-[0_4px_20px_rgb(0,0,0,0.02)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-shadow duration-700"
         onClick={onClick}
       >
-        <div className="relative h-[260px] sm:h-[300px] md:h-[340px] lg:h-[360px] bg-neutral-200 animate-pulse overflow-hidden">
+        <div className={`relative h-[260px] sm:h-[300px] md:h-[340px] lg:h-[360px] overflow-hidden ${loaded ? "" : "bg-neutral-200"}`}>
           <Image
             src={artwork.src}
             alt={artwork.title}
             fill
-            className="object-cover"
-            style={{ opacity: 0 }}
-            onLoad={(e) => {
-              const img = e.currentTarget;
-              img.style.opacity = "1";
-              img.style.transition = "opacity 0.5s ease";
-              img.parentElement?.classList.remove("animate-pulse");
-              img.parentElement?.classList.remove("bg-neutral-200");
-            }}
+            className={`object-cover transition-opacity duration-500 ${loaded ? "opacity-100" : "opacity-0"}`}
+            onLoad={() => setLoaded(true)}
             sizes="(max-width: 640px) 200px, (max-width: 768px) 240px, (max-width: 1024px) 280px, 300px"
           />
         </div>
@@ -70,7 +54,7 @@ function ArtworkCard({
           </div>
         </div>
       </motion.div>
-    </motion.div>
+    </div>
   );
 }
 

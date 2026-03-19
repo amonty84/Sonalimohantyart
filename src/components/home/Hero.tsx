@@ -50,7 +50,7 @@ export default function Hero() {
                 className="absolute inset-0 z-0"
             >
                 <Image
-                    src="/images/New-Hero.jpeg"
+                    src="/images/The-Magnificient-Duo_36X30_SonaliMohanty_2025-1.webp"
                     alt="Atmospheric Background Artwork"
                     fill
                     className="object-cover object-center grayscale-[0.2]"
